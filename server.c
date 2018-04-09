@@ -16,12 +16,11 @@ int main()
 
     int socketFileDescriptor;
     int socketAceitoFileDescriptor;
+    struct sockaddr_in enderecoServidor;
+    char buffer[1024] = "Sou eu do % Servidor mais uma vez";
 
-    char buffer[1024] = {'S','o','u',' ','e','u',' ','d','o',' ',' ',' ','S','e','r','v','i',
-                         'd','o','r',' ','M','a','i','s',' ','u','m','a',' ','v','e','z','\0'};
 
     socketFileDescriptor = socket(AF_INET ,SOCK_STREAM , 0);
-    struct sockaddr_in enderecoServidor;
 
     enderecoServidor.sin_family = AF_INET;
     enderecoServidor.sin_addr.s_addr = htonl(INADDR_ANY);
@@ -29,7 +28,8 @@ int main()
 
     bind(socketFileDescriptor, (struct sockaddr*)&enderecoServidor , sizeof(enderecoServidor));
 
-    listen(socketFileDescriptor, 10) == -1;
+    listen(socketFileDescriptor, 10);
+
 
     char oi = 0;
     while(1)
